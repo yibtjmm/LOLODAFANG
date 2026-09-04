@@ -39,6 +39,7 @@ process.on('unhandledRejection', (reason) => logFatalError('unhandledRejection',
 app.commandLine.appendSwitch('disable-features', 'CalculateNativeWinOcclusion')
 
 const isDesktopDev = process.env.INTERACT_DESKTOP_DEV === '1'
+const PRODUCT_NAME = 'LOLODAFANG'
 const APP_USER_MODEL_ID = 'tw.interact.presenter.desktop'
 const APP_WINDOW_ICON_PATH = isDesktopDev
   ? path.join(__dirname, '..', 'build', 'icon.ico')
@@ -121,7 +122,7 @@ function createWindow() {
     alwaysOnTop: false,
     skipTaskbar: false,
     show: false,
-    title: 'InterAct Presenter',
+    title: `${PRODUCT_NAME} Presenter`,
     icon: APP_WINDOW_ICON_PATH,
     backgroundColor: '#00000000',
     webPreferences: {
@@ -139,18 +140,18 @@ function createWindow() {
     appIconPath: APP_RELAUNCH_ICON_PATH,
     appIconIndex: 0,
     relaunchCommand: `"${APP_EXECUTABLE_PATH}"`,
-    relaunchDisplayName: 'InterAct',
+    relaunchDisplayName: PRODUCT_NAME,
   })
   configureWebContents(mainWindow)
 
   loadAppRoute(mainWindow, '/presenter/new')
 
   mainWindow.webContents.on('did-fail-load', (_event, errorCode, errorDescription, validatedUrl) => {
-    console.error('InterAct failed to load', { errorCode, errorDescription, validatedUrl })
+    console.error(`${PRODUCT_NAME} failed to load`, { errorCode, errorDescription, validatedUrl })
   })
 
   mainWindow.webContents.on('render-process-gone', (_event, details) => {
-    console.error('InterAct renderer process gone', details)
+    console.error(`${PRODUCT_NAME} renderer process gone`, details)
   })
 
   mainWindow.on('restore', () => {
@@ -312,7 +313,7 @@ function createReportWindow(sessionId, generate = false) {
     resizable: true,
     maximizable: true,
     backgroundColor: '#f7f8fb',
-    title: 'InterAct 課堂互動報告',
+    title: `${PRODUCT_NAME} 課堂互動報告`,
     icon: APP_WINDOW_ICON_PATH,
     webPreferences: {
       contextIsolation: true,
@@ -327,7 +328,7 @@ function createReportWindow(sessionId, generate = false) {
     appIconPath: APP_RELAUNCH_ICON_PATH,
     appIconIndex: 0,
     relaunchCommand: `"${APP_EXECUTABLE_PATH}"`,
-    relaunchDisplayName: 'InterAct',
+    relaunchDisplayName: PRODUCT_NAME,
   })
   configureWebContents(reportWindow)
 
@@ -390,7 +391,7 @@ function createRosterWindow(sessionId) {
     resizable: true,
     alwaysOnTop: true,
     backgroundColor: '#ffffff',
-    title: 'InterAct 線上名單',
+    title: `${PRODUCT_NAME} 線上名單`,
     icon: APP_WINDOW_ICON_PATH,
     webPreferences: {
       contextIsolation: true,
@@ -405,7 +406,7 @@ function createRosterWindow(sessionId) {
     appIconPath: APP_RELAUNCH_ICON_PATH,
     appIconIndex: 0,
     relaunchCommand: `"${APP_EXECUTABLE_PATH}"`,
-    relaunchDisplayName: 'InterAct',
+    relaunchDisplayName: PRODUCT_NAME,
   })
   configureWebContents(rosterWindow)
   rosterWindow.setAlwaysOnTop(true, TOPMOST_LEVEL, ROSTER_RELATIVE_LEVEL)
@@ -444,7 +445,7 @@ function createWordCloudWindow(sessionId) {
     maximizable: true,
     alwaysOnTop: true,
     backgroundColor: '#0b1020',
-    title: 'InterAct 彈幕文字雲',
+    title: `${PRODUCT_NAME} 彈幕文字雲`,
     icon: APP_WINDOW_ICON_PATH,
     webPreferences: {
       contextIsolation: true,
@@ -459,7 +460,7 @@ function createWordCloudWindow(sessionId) {
     appIconPath: APP_RELAUNCH_ICON_PATH,
     appIconIndex: 0,
     relaunchCommand: `"${APP_EXECUTABLE_PATH}"`,
-    relaunchDisplayName: 'InterAct',
+    relaunchDisplayName: PRODUCT_NAME,
   })
   configureWebContents(wordCloudWindow)
   wordCloudWindow.setAlwaysOnTop(true, TOPMOST_LEVEL, WORD_CLOUD_RELATIVE_LEVEL)
@@ -514,7 +515,7 @@ function createCustomQuizReviewWindow(sessionId, questionId) {
     maximizable: true,
     alwaysOnTop: true,
     backgroundColor: '#f7f8fb',
-    title: 'InterAct 自訂測驗檢視',
+    title: `${PRODUCT_NAME} 自訂測驗檢視`,
     icon: APP_WINDOW_ICON_PATH,
     webPreferences: {
       contextIsolation: true,
@@ -529,7 +530,7 @@ function createCustomQuizReviewWindow(sessionId, questionId) {
     appIconPath: APP_RELAUNCH_ICON_PATH,
     appIconIndex: 0,
     relaunchCommand: `"${APP_EXECUTABLE_PATH}"`,
-    relaunchDisplayName: 'InterAct',
+    relaunchDisplayName: PRODUCT_NAME,
   })
   configureWebContents(nextQuizReviewWindow)
   nextQuizReviewWindow.setAlwaysOnTop(true, TOPMOST_LEVEL, QUIZ_REVIEW_RELATIVE_LEVEL)
@@ -738,7 +739,7 @@ ipcMain.handle('window:open-custom-quiz-review', (_event, sessionId, questionId)
 ipcMain.handle('capture:list', listCaptureSources)
 
 ipcMain.handle('capture:start-selection', async () => {
-  if (!mainWindow || mainWindow.isDestroyed()) throw new Error('InterAct presenter window is unavailable.')
+  if (!mainWindow || mainWindow.isDestroyed()) throw new Error(`${PRODUCT_NAME} presenter window is unavailable.`)
 
   lastControlBounds = mainWindow.getBounds()
   const targetDisplay = displayForBounds(lastControlBounds)

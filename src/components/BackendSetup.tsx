@@ -4,6 +4,7 @@ import { backendConfig, clearBackendConfig, requireSupabase, saveBackendConfig, 
 import { canDeployBackend, checkToken, deployableFunctions, deployFunction, runSchema, setOwnerKey, setSecrets, verifyBackend } from '../lib/backendDeploy'
 import { generateOwnerKey, getOwnerKey, saveOwnerKey } from '../lib/ownerKey'
 import type { DeployStep } from '../lib/backendDeploy'
+import { brand } from '../lib/brand'
 
 type Props = {
   onCancel?: () => void
@@ -214,7 +215,7 @@ export function BackendSetup({ onCancel }: Props) {
         <span className="form-heading-icon"><Server size={24} /></span>
         <h1>{embedded ? '系統設定' : '連接你的 Supabase 專案'}</h1>
         <p className="muted">
-          InterAct 使用你自己的 Supabase 專案存放課堂資料，資料不會經過其他人。
+          {brand.name} 使用你自己的 Supabase 專案存放課堂資料，資料不會經過其他人。
           填入專案資訊後即可開始使用。
         </p>
 
@@ -295,13 +296,13 @@ export function BackendSetup({ onCancel }: Props) {
         </div>
 
         <details className="backend-setup-help">
-          <summary>還沒建立後端？讓 InterAct 幫你部署</summary>
+          <summary>還沒建立後端？讓 {brand.name} 幫你部署</summary>
           <p className="muted">
             在 <a href="https://supabase.com/dashboard" rel="noreferrer" target="_blank">
               Supabase 後台 <ExternalLink size={12} />
             </a> 免費建立專案後，到 <a href="https://supabase.com/dashboard/account/tokens" rel="noreferrer" target="_blank">
               Access Tokens <ExternalLink size={12} />
-            </a> 產生一組權杖貼在下方，InterAct 會自動建立資料表、部署後端函式並設定金鑰。
+            </a> 產生一組權杖貼在下方，{brand.name} 會自動建立資料表、部署後端函式並設定金鑰。
           </p>
 
           <label>
@@ -353,7 +354,7 @@ export function BackendSetup({ onCancel }: Props) {
             {deploying ? '部署中...' : '開始自動部署'}
           </button>
 
-          {!canDeployBackend && <p className="field-hint">自動部署只能在 InterAct 桌面版使用。</p>}
+          {!canDeployBackend && <p className="field-hint">自動部署只能在 {brand.name} 桌面版使用。</p>}
 
           {steps.length > 0 && (
             <ul className="deploy-steps">

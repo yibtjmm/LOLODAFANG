@@ -1,6 +1,7 @@
 import ExcelJS from 'exceljs'
 import type { QuestionAnalysis, SessionAnalysis, SessionMetrics, SessionReportData } from '../types'
 import { badgeText, buzzerWinsFrom, participationRows } from './participation'
+import { brand } from './brand'
 
 const COLORS = {
   primary: '1463FF',
@@ -118,14 +119,14 @@ function addOverviewSection(sheet: ExcelJS.Worksheet, title: string, rows: Array
 
 export async function exportSessionReport(data: SessionReportData, analysis: SessionAnalysis, metrics: SessionMetrics) {
   const workbook = new ExcelJS.Workbook()
-  workbook.creator = 'InterAct'
+  workbook.creator = brand.name
   workbook.created = new Date()
   workbook.modified = new Date()
   workbook.calcProperties.fullCalcOnLoad = true
 
   const overview = workbook.addWorksheet('總覽', { views: [{ state: 'frozen', ySplit: 2 }] })
   overview.columns = [{ width: 28 }, { width: 105 }]
-  const reportTitle = overview.addRow([`InterAct 課堂互動報告｜${data.session.title}`])
+  const reportTitle = overview.addRow([`${brand.name} 課堂互動報告｜${data.session.title}`])
   overview.mergeCells('A1:B1')
   reportTitle.height = 36
   reportTitle.font = { bold: true, size: 18, color: { argb: COLORS.white } }
@@ -596,7 +597,7 @@ export async function exportSessionReport(data: SessionReportData, analysis: Ses
   const anchor = document.createElement('a')
   const safeTitle = data.session.title.replace(/[\\/:*?"<>|]/g, '-').slice(0, 60) || '課堂報告'
   anchor.href = url
-  anchor.download = `InterAct-${safeTitle}-${new Date().toISOString().slice(0, 10)}.xlsx`
+  anchor.download = `${brand.name}-${safeTitle}-${new Date().toISOString().slice(0, 10)}.xlsx`
   document.body.appendChild(anchor)
   anchor.click()
   anchor.remove()

@@ -6,6 +6,8 @@
 // The Management API sends no CORS headers, so every call goes through the
 // Electron main process. That also means this only works in the desktop app.
 
+import { brand } from './brand'
+
 // Vite inlines these at build time, so the sources travel inside the app.
 const functionSources = import.meta.glob('/supabase/functions/**/*.ts', {
   query: '?raw',
@@ -48,7 +50,7 @@ type ManagementRequest = {
 
 async function call(request: ManagementRequest) {
   const bridge = window.interactDesktop?.supabaseManagement
-  if (!bridge) throw new Error('自動部署只能在 InterAct 桌面版使用。')
+  if (!bridge) throw new Error(`自動部署只能在 ${brand.name} 桌面版使用。`)
   return bridge(request)
 }
 

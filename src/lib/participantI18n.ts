@@ -1,3 +1,5 @@
+import { brand } from './brand'
+
 export type ParticipantLocale = 'zh-TW' | 'en'
 
 const messages = {
@@ -5,7 +7,7 @@ const messages = {
     language: '語言', chinese: '繁體中文', english: 'English', courseEnded: '課程已結束', classDismissed: '下課啦！',
     thankYou: '謝謝你的參與。', aiSummary: 'AI 課程總結', todayHighlights: '今天的課程重點', lessonKeyPoints: '課堂重點整理',
     learningReview: '學習整理', strengths: '本次掌握的重點', reviewMore: '可以再複習', sharedResources: '課堂文字與連結',
-    attendee: '與會者', welcome: '歡迎加入', session: 'InterAct 場次', sendFeedback: '送出問題或回饋',
+    attendee: '與會者', welcome: '歡迎加入', session: brand.zhSessionName, sendFeedback: '送出問題或回饋',
     messagePlaceholder: '送出後會即時出現在講者畫面，上限36個中文字或24個英文單字', limit: '上限 36 個中文字或 24 個英文單字',
     used: '目前使用', send: '送出', questionEnded: '本題已結束。', submittedAnswer: '已送出答案：', interactiveQuestion: '互動題',
     answerPlaceholder: '請輸入你的回答', submitAnswer: '送出答案', presenterDispatch: '講者派送', collapse: '收合舊內容', expandAll: '展開全部',
@@ -30,7 +32,7 @@ const messages = {
     language: 'Language', chinese: '繁體中文', english: 'English', courseEnded: 'Class ended', classDismissed: 'That’s a wrap!',
     thankYou: 'Thank you for participating.', aiSummary: 'AI class summary', todayHighlights: 'Today’s class highlights', lessonKeyPoints: 'Key takeaways',
     learningReview: 'Learning review', strengths: 'What the class understood', reviewMore: 'Worth reviewing', sharedResources: 'Class text and links',
-    attendee: 'Participant', welcome: ', welcome to ', session: 'InterAct session', sendFeedback: 'Send a question or feedback',
+    attendee: 'Participant', welcome: ', welcome to ', session: brand.enSessionName, sendFeedback: 'Send a question or feedback',
     messagePlaceholder: 'Your message appears on the presenter screen immediately (up to 24 English words)', limit: 'Up to 24 English words or 36 CJK characters',
     used: 'Used', send: 'Send', questionEnded: 'This question has ended.', submittedAnswer: 'Answer submitted: ', interactiveQuestion: 'Interactive question',
     answerPlaceholder: 'Enter your answer', submitAnswer: 'Submit answer', presenterDispatch: 'Presenter dispatch', collapse: 'Hide older items', expandAll: 'Show all',

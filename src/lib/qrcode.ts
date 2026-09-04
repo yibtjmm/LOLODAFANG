@@ -2,7 +2,7 @@ import { backendConfig } from './supabase'
 
 // Students load this shared page instead of one the presenter has to deploy, so
 // the link has to say which Supabase project the session lives in.
-const DEFAULT_PUBLIC_APP_URL = 'https://lienyujen.github.io/InterAct'
+const DEFAULT_PUBLIC_APP_URL = 'https://yibtjmm.github.io/LOLODAFANG'
 
 export function buildJoinUrl(sessionReference: string) {
   // A runtime setting wins over the value baked in at build time, so someone who

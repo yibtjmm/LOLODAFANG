@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowLeft, BookOpen, ChartNoAxesCombined, Clock, Download, ListChecks, LoaderCircle, MessageSquareText, RefreshCw, Users } from 'lucide-react'
+import { brand } from '../lib/brand'
 import { getPresenterToken } from '../lib/presenterAuth'
 import { useSessionReportBack } from '../lib/sessionReportNavigation'
 import { requireSupabase } from '../lib/supabase'
@@ -277,7 +278,7 @@ export function SessionReportPage() {
     <main className="session-report-page">
       <header className="report-header">
         <div>
-          <p className="eyebrow">InterAct Session Report</p>
+          <p className="eyebrow">{brand.name} Session Report</p>
           <h1><BookOpen size={28} />課堂互動報告</h1>
           <p className="muted">{reportData.session.title}．{new Date(reportData.session.created_at).toLocaleString('zh-TW')}</p>
         </div>

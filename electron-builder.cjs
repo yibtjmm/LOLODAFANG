@@ -1,12 +1,12 @@
 // APP_EDITION picks the Windows app to build. It only renames the artifact and
 // its product name; both editions ship the same code, and the caption controls
 // are gated at runtime by VITE_APP_EDITION (see src/lib/edition.ts).
-//   unset / standard -> InterAct.exe
-//   plus             -> InterActPlus.exe
-const productName = process.env.APP_EDITION === 'plus' ? 'InterActPlus' : 'InterAct'
+//   unset / standard -> LOLODAFANG.exe
+//   plus             -> LOLODAFANGPlus.exe
+const productName = process.env.APP_EDITION === 'plus' ? 'LOLODAFANGPlus' : 'LOLODAFANG'
 
 module.exports = {
-  appId: 'tw.interact.presenter.desktop',
+  appId: 'tw.lolodafang.presenter.desktop',
   productName,
   artifactName: `${productName}.\${ext}`,
   directories: {

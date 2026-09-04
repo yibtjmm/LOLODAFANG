@@ -1,4 +1,5 @@
 import { ArrowLeft, GripHorizontal, Minus, X } from 'lucide-react'
+import { brand } from '../lib/brand'
 
 interface DesktopWindowChromeProps {
   confirmClose?: boolean
@@ -13,14 +14,14 @@ export function DesktopWindowChrome({ confirmClose = true, onBack }: DesktopWind
       void onBack()
       return
     }
-    if (!confirmClose || window.confirm('確定要關閉 InterAct？')) window.interactDesktop?.close()
+    if (!confirmClose || window.confirm(`確定要關閉 ${brand.name}？`)) window.interactDesktop?.close()
   }
 
   return (
     <header className="desktop-window-chrome">
       <div className="desktop-drag-handle" title="拖曳視窗">
         <GripHorizontal size={16} />
-        <span>InterAct</span>
+        <span>{brand.name}</span>
       </div>
       <div className="desktop-window-actions">
         {onBack && (

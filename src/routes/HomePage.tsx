@@ -3,6 +3,7 @@ import type { FormEvent } from 'react'
 import { ArrowRight, LogIn } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { SetupNotice } from '../components/SetupNotice'
+import { brand } from '../lib/brand'
 
 export function HomePage() {
   const [sessionId, setSessionId] = useState('')
@@ -18,8 +19,8 @@ export function HomePage() {
     <main className="home-page">
       <SetupNotice />
       <section className="home-content">
-        <p className="eyebrow">Intelligent Teaching, Engagement, Response and Classroom Technology</p>
-        <h1>InterAct 即時互動教學系統</h1>
+        <p className="eyebrow">{brand.tagline}</p>
+        <h1>{brand.zhTitle}</h1>
         <p className="lede">請掃描講師提供的 QR Code，或輸入場次代碼加入互動課堂。</p>
         <div className="home-actions">
           <form className="join-form" onSubmit={join}>

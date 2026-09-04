@@ -10,6 +10,7 @@ import { hasOwnerKey } from '../lib/ownerKey'
 import { deleteManagedSession, endManagedSession, listManagedSessions } from '../lib/presenterSessions'
 import type { ManagedSession } from '../lib/presenterSessions'
 import { isSupabaseConfigured, requireSupabase } from '../lib/supabase'
+import { brand } from '../lib/brand'
 
 async function getFunctionErrorMessage(error: unknown) {
   if (!(error instanceof Error)) return '建立場次失敗'
@@ -190,9 +191,11 @@ export function PresenterNewPage() {
           <Settings size={18} />系統設定
         </button>
         <p className="app-credit">
-          <a href="https://github.com/lienyujen/InterAct/blob/main/LICENSE" rel="noreferrer" target="_blank">InterAct</a>
-          {' | Designed and Developed by '}
-          <a href="https://www.facebook.com/lienyujen/" rel="noreferrer" target="_blank">Yujen Lien</a>
+          {brand.name}
+          {' | Powered by '}
+          <a href={brand.sourceLicenseUrl} rel="noreferrer" target="_blank">{brand.sourceName}</a>
+          {' by '}
+          <a href={brand.sourceAuthorUrl} rel="noreferrer" target="_blank">{brand.sourceAuthor}</a>
         </p>
       </form>
       {/* Reachable after setup too, so keys can be added or the project changed
@@ -209,7 +212,7 @@ export function PresenterNewPage() {
           <section aria-labelledby="manage-sessions-title" aria-modal="true" className="modal session-manager-modal" role="dialog">
             <div className="modal-heading">
               <div>
-                <p className="eyebrow">InterAct</p>
+                <p className="eyebrow">{brand.name}</p>
                 <h2 id="manage-sessions-title">管理場次</h2>
               </div>
               <div className="session-manager-heading-actions">

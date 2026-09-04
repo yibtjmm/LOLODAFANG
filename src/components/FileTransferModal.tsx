@@ -7,6 +7,7 @@ import { isAnalyzableFile, quizSettingsFrom } from '../lib/customQuiz'
 import { CustomQuizFields } from './CustomQuizFields'
 import type { CustomQuizSettings } from '../lib/customQuiz'
 import type { FileResponse, Question, QuizRequestedType, SharedFile } from '../types'
+import { brand } from '../lib/brand'
 
 type Tab = 'share' | 'collect'
 
@@ -109,7 +110,7 @@ export function FileTransferModal({
       <section aria-labelledby="file-transfer-title" aria-modal="true" className="modal file-transfer-modal" role="dialog">
         <div className="modal-heading">
           <div>
-            <p className="eyebrow">InterAct</p>
+            <p className="eyebrow">{brand.name}</p>
             <h2 id="file-transfer-title">檔案傳送</h2>
           </div>
           <button aria-label="關閉檔案傳送" className="icon-button ghost-button" type="button" onClick={onClose}>

@@ -1,8 +1,8 @@
-# InterAct 即時互動教學系統
+# LOLODAFANG 即時互動教學系統
 
-InterAct stands for Intelligent Teaching, Engagement, Response and Classroom Technology.
+LOLODAFANG 是以 InterAct 為基礎客製化的即時課堂互動系統。
 
-InterAct 是提供教師、講師、訓練師與演講者使用的即時課堂互動系統。講師在 Windows 端建立場次，學員掃描 QR Code 後即可用手機瀏覽器加入，不需要安裝 App。
+系統提供教師、講師、訓練師與演講者使用。講師在 Windows 端建立場次，學員掃描 QR Code 後即可用手機瀏覽器加入，不需要安裝 App。
 
 ## 主要功能
 
@@ -25,13 +25,13 @@ InterAct 是提供教師、講師、訓練師與演講者使用的即時課堂�
 
 ## 快速開始（不需要開發環境）
 
-1. 從 [Releases](https://github.com/lienyujen/InterAct/releases) 下載 `InterAct.zip`，解壓後執行裡面的 `InterAct.exe`。
+1. 從 [Releases](https://github.com/yibtjmm/LOLODAFANG/releases) 下載 `LOLODAFANG.zip`，解壓後執行裡面的 `LOLODAFANG.exe`。
 2. 在 [Supabase](https://supabase.com/dashboard) 免費建立一個專案。
-3. 開啟 InterAct，出現設定畫面時填入專案識別碼與 publishable key。
-4. 展開「還沒建立後端？讓 InterAct 幫你部署」，貼上一組
+3. 開啟 LOLODAFANG，出現設定畫面時填入專案識別碼與 publishable key。
+4. 展開「還沒建立後端？讓 LOLODAFANG 幫你部署」，貼上一組
    [Supabase 存取權杖](https://supabase.com/dashboard/account/tokens)與 Gemini API key，按下自動部署。
 
-InterAct 會替你建立資料表、部署 Edge Functions 並設定金鑰，不需要安裝 Node 或 Supabase CLI。
+LOLODAFANG 會替你建立資料表、部署 Edge Functions 並設定金鑰，不需要安裝 Node 或 Supabase CLI。
 建議使用 fine-grained token 並只勾選該專案的 Edge Functions 寫入與資料庫權限；權杖只在部署當下使用，不會被儲存。
 
 學員端不必自行部署 —— QR Code 會帶上你的專案識別碼，共用學員端會連回你自己的 Supabase。
@@ -51,10 +51,10 @@ pnpm build
 pnpm desktop:package
 ```
 
-`pnpm desktop:package` 會在 `release/` 產生 Windows x64 版本。新手可使用自動化腳本，完成後會把 `InterAct.exe` 複製到專案根目錄：
+`pnpm desktop:package` 會在 `release/` 產生 Windows x64 版本。新手可使用自動化腳本，完成後會把 `LOLODAFANG.exe` 複製到專案根目錄：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\skills\interact-self-deploy\scripts\package-windows.ps1 -SupabaseUrl https://YOUR_PROJECT_REF.supabase.co -PublishableKey sb_publishable_YOUR_VALUE -PublicAppUrl https://YOUR_GITHUB_USER.github.io/InterAct
+powershell -ExecutionPolicy Bypass -File .\skills\interact-self-deploy\scripts\package-windows.ps1 -SupabaseUrl https://YOUR_PROJECT_REF.supabase.co -PublishableKey sb_publishable_YOUR_VALUE -PublicAppUrl https://yibtjmm.github.io/LOLODAFANG
 ```
 
 ## 自行部署（進階）
@@ -77,11 +77,11 @@ powershell -ExecutionPolicy Bypass -File .\scripts\install-deployment-skill.ps1
 
 不要把 Gemini key、Reurl key、Supabase secret key、service-role key 或 GitHub token 放入 `.env`、GitHub Pages variables、前端程式、截圖或公開訊息。
 
-學員端固定顯示 InterAct 作者的 [Facebook](https://www.facebook.com/lienyujen) 與 [YouTube](https://www.youtube.com/@lienlaoshi) 連結。
+LOLODAFANG 保留原 InterAct 授權資訊，學員端介面已改為 LOLODAFANG 品牌標章。
 
 ## 自行託管學員端
 
-預設情況下，QR Code 指向共用的學員端網頁 `https://lienyujen.github.io/InterAct`。它只是一份靜態網頁，會依照加入連結上的參數連到**你自己的** Supabase 專案 —— 你的課堂資料不會經過作者的專案。
+預設情況下，QR Code 指向 LOLODAFANG 的學員端網頁 `https://yibtjmm.github.io/LOLODAFANG`。它只是一份靜態網頁，會依照加入連結上的參數連到**你自己的** Supabase 專案 —— 你的課堂資料不會經過作者的專案。
 
 想改用自己的網址，打包前設定：
 

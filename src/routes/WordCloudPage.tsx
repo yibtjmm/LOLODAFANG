@@ -2,6 +2,7 @@ import { Cloud, MessageSquareText } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { WordCloudCanvas } from '../components/WordCloudCanvas'
+import { brand } from '../lib/brand'
 import { isSupabaseConfigured, requireSupabase } from '../lib/supabase'
 import type { Message, Session } from '../types'
 
@@ -147,7 +148,7 @@ export function WordCloudPage() {
     <main className="word-cloud-page">
       <header className="word-cloud-header">
         <div>
-          <p><Cloud size={20} />InterAct 彈幕文字雲</p>
+          <p><Cloud size={20} />{brand.name} 彈幕文字雲</p>
           <h1>{session?.title || '載入場次...'}</h1>
         </div>
         <div className="word-cloud-tools">
