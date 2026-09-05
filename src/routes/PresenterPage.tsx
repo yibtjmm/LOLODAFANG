@@ -18,6 +18,7 @@ import { SetupNotice } from '../components/SetupNotice'
 import { TextDispatchModal } from '../components/TextDispatchModal'
 import { FileTransferModal } from '../components/FileTransferModal'
 import { finalizeLottery } from '../lib/lottery'
+import { edgeFunctionErrorMessage } from '../lib/edgeFunctionError'
 import { getPresenterToken } from '../lib/presenterAuth'
 import { endManagedSession } from '../lib/presenterSessions'
 import { isBuzzerPending } from '../lib/buzzer'
@@ -31,7 +32,7 @@ import { SOURCE_CAPTION_LANGUAGE, resolvedCaptionLanguage } from '../lib/caption
 import { isSupabaseConfigured, requireSupabase } from '../lib/supabase'
 import { useSessionPresence } from '../lib/useSessionPresence'
 import type { AiSummary, Answer, AudioResponse, BuzzerSessionEvent, ExitTicket, FileResponse, SharedFile, LotterySessionEvent, Participant, PresenterQuizResults, Question, QuestionAnalysis, QuestionType, Session, SessionEvent } from '../types'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import type { RealtimeChannel } from '@supabase/supabase-js'
 
 function microphoneErrorMessage(error: unknown) {
@@ -57,21 +58,9 @@ function readableRealtimeError(message: string) {
   return message
 }
 
-async function edgeFunctionErrorMessage(error: unknown, fallback: string) {
-  const context = (error as { context?: Response } | null)?.context
-  if (context) {
-    try {
-      const payload = await context.clone().json() as { message?: unknown }
-      if (typeof payload.message === 'string' && payload.message.trim()) return payload.message.trim()
-    } catch {
-      // Fall back to the SDK error message when the response is not JSON.
-    }
-  }
-  return error instanceof Error && error.message ? error.message : fallback
-}
-
 export function PresenterPage() {
   const { sessionId = '' } = useParams()
+  const navigate = useNavigate()
   const [session, setSession] = useState<Session | null>(null)
   const [participants, setParticipants] = useState<Participant[]>([])
   const [questions, setQuestions] = useState<Question[]>([])
@@ -1533,6 +1522,7 @@ export function PresenterPage() {
             setFileTransferOpen(true)
             void refreshSharedFiles()
           }}
+          onOpenLifeMap={() => navigate(`/life-map/${sessionId}`)}
           onOpenTextDispatch={() => {
             setTextDispatchError('')
             setTextDispatchOpen(true)

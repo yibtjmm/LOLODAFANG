@@ -1,4 +1,4 @@
-import { AudioLines, Captions, CircleDot, Cloud, Dice5, DoorOpen, Eye, EyeOff, FolderUp, MessageSquare, MonitorUp, Send, Settings, Shapes, Sparkles, Square, Users } from 'lucide-react'
+import { AudioLines, Captions, CircleDot, Cloud, Dice5, DoorOpen, Eye, EyeOff, FolderUp, Map, MessageSquare, MonitorUp, Send, Settings, Shapes, Sparkles, Square, Users } from 'lucide-react'
 import { isPlusEdition } from '../lib/edition'
 import type { Session } from '../types'
 
@@ -15,6 +15,7 @@ type Props = {
   onStartBuzzer: () => void
   onOpenTextDispatch: () => void
   onOpenFileTransfer: () => void
+  onOpenLifeMap: () => void
   onOpenRoster: () => void
   onOpenWordCloud: () => void
   onOpenSettings: () => void
@@ -38,6 +39,7 @@ export function PresenterControlPanel({
   onStartBuzzer,
   onOpenTextDispatch,
   onOpenFileTransfer,
+  onOpenLifeMap,
   onOpenRoster,
   onOpenWordCloud,
   onOpenSettings,
@@ -135,6 +137,10 @@ export function PresenterControlPanel({
           <button className="control-action energy-control-action" type="button" onClick={onOpenWordCloud} disabled={busy}>
             <span className="control-action-icon"><Cloud size={18} /></span>
             彈幕文字雲
+          </button>
+          <button className="control-action share-action" type="button" onClick={onOpenLifeMap} disabled={busy}>
+            <span className="control-action-icon"><Map size={18} /></span>
+            生命地圖
           </button>
           {isPlusEdition && (
             <>

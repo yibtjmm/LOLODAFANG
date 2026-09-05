@@ -60,7 +60,7 @@ function QuestionStatusActions({
 }
 
 function AiAnalysisPanel({ question, answers, analysis, analysisBusy, analysisError, onAnalyze, onSetCorrectAnswer }: AnalysisProps) {
-  if (!question || ['send_screen', 'pronunciation', 'oral_response'].includes(question.type)) return null
+  if (!question || !question.screenshot_id || ['send_screen', 'pronunciation', 'oral_response'].includes(question.type)) return null
 
   const canAnalyze = question.status !== 'active' && answers.length > 0
   const suggestion = analysis?.question_understanding.suggested_correct_answer
