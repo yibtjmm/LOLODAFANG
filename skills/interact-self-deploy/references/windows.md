@@ -11,8 +11,8 @@ powershell -ExecutionPolicy Bypass -File .\skills\interact-self-deploy\scripts\p
   -PublicAppUrl https://OWNER.github.io/REPOSITORY
 ```
 
-腳本會建立本機且被 Git 忽略的 `.env`、安裝鎖定版本的相依套件、建置前端、打包 Windows x64 portable app，最後把 `InterAct.exe` 複製到專案根目錄。
+腳本會建立本機且被 Git 忽略的 `.env`、安裝鎖定版本的相依套件、建置前端、打包 Windows x64 portable app，最後把 `LOLODAFANG.exe` 複製到專案根目錄。
 
 ## Checkpoint
 
-開啟 `InterAct.exe` 建立場次，使用不同網路的手機掃描 QR Code。確認網址指向自己的 GitHub Pages，且新場次只出現在自己的 Supabase 專案。
+開啟 `LOLODAFANG.exe` 建立場次，使用不同網路的手機掃描 QR Code。確認網址指向自己的 GitHub Pages，且新場次只出現在自己的 Supabase 專案。

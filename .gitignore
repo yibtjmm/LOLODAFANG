@@ -14,8 +14,11 @@ release
 /release-build/
 /InterAct.exe
 /InterAct.zip
+/LOLODAFANG.exe
+/LOLODAFANG.zip
 # Locally extracted zip build kept around to run directly.
 /InterAct/
+/LOLODAFANG/
 .codex-tmp/
 supabase/.temp/
 .env

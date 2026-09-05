@@ -1,6 +1,6 @@
 ---
 name: interact-self-deploy
-description: Deploy a complete self-hosted InterAct installation with separate Supabase, Gemini API, GitHub Pages, Reurl.cc, and Windows portable-app configuration. Use when setting up InterAct for a new instructor, replacing service credentials, cloning or forking InterAct for private testing, diagnosing an incomplete deployment, or rebuilding InterAct.exe for another person's infrastructure.
+description: Deploy a complete self-hosted LOLODAFANG installation with separate Supabase, Gemini API, GitHub Pages, Reurl.cc, and Windows portable-app configuration. Use when setting up LOLODAFANG for a new instructor, replacing service credentials, cloning or forking LOLODAFANG for private testing, diagnosing an incomplete deployment, or rebuilding LOLODAFANG.exe for another person's infrastructure.
 ---
 
 # InterAct Self Deployment
@@ -27,7 +27,7 @@ Treat the Supabase publishable key and URLs as public configuration. Treat Gemin
 2. Read [references/gemini.md](references/gemini.md), then run `scripts/deploy-gemini.ps1`. Do not continue until an AI question analysis succeeds.
 3. Read [references/github-pages.md](references/github-pages.md), then run `scripts/configure-github-pages.ps1`. Do not continue until the participant URL loads from GitHub Pages.
 4. Read [references/reurl.md](references/reurl.md), then run `scripts/deploy-reurl.ps1`. Create a new InterAct session and verify its QR panel shows a `reurl.cc` URL.
-5. Read [references/windows.md](references/windows.md), then run `scripts/package-windows.ps1`. Confirm the resulting root `InterAct.exe` opens and its QR code targets the new GitHub Pages site.
+5. Read [references/windows.md](references/windows.md), then run `scripts/package-windows.ps1`. Confirm the resulting root `LOLODAFANG.exe` opens and its QR code targets the new GitHub Pages site.
 
 ## Operating Rules
 
