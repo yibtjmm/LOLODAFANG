@@ -65,7 +65,7 @@ powershell -ExecutionPolicy Bypass -File .\skills\interact-self-deploy\scripts\p
 2. Google AI Studio：Gemini API key，只存於 Supabase secret。
 3. Reurl.cc：短網址 API key，只存於 Supabase secret（選用）。
 4. OpenAI：即時字幕與同步口譯用，只存於 Supabase secret（選用，依音訊時長計費）。
-5. Windows：把自己的公開設定打包進 `InterAct.exe`。
+5. Windows：把自己的公開設定打包進 `LOLODAFANG.exe`。
 
 **學員端網頁不需要自行部署。** 加入連結會帶著你的 Supabase 專案識別碼，共用的學員端會據此連到你的專案，課堂資料不會混在一起。
 
