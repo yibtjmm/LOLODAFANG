@@ -5,7 +5,6 @@ import { DesktopOverlayPage } from './routes/DesktopOverlayPage'
 import { CustomQuizReviewPage } from './routes/CustomQuizReviewPage'
 import { HomePage } from './routes/HomePage'
 import { JoinPage } from './routes/JoinPage'
-import { LifeMapPage } from './routes/LifeMapPage'
 import { ParticipantPage } from './routes/ParticipantPage'
 import { RosterPage } from './routes/RosterPage'
 import { PresenterNewPage } from './routes/PresenterNewPage'
@@ -53,7 +52,6 @@ function AppRoutes() {
         <Route path="/desktop-overlay/:sessionId" element={isDesktop ? <DesktopOverlayPage /> : <Navigate to="/" replace />} />
         <Route path="/custom-quiz-review/:sessionId/:questionId" element={isDesktop ? <CustomQuizReviewPage /> : <Navigate to="/" replace />} />
         <Route path="/session-report/:sessionId" element={isDesktop ? <SessionReportPage /> : <Navigate to="/" replace />} />
-        <Route path="/life-map/:sessionId" element={isDesktop ? <LifeMapPage /> : <Navigate to="/" replace />} />
         <Route path="/roster/:sessionId" element={isDesktop ? <RosterPage /> : <Navigate to="/" replace />} />
         <Route path="/word-cloud/:sessionId" element={isDesktop ? <WordCloudPage /> : <Navigate to="/" replace />} />
         <Route path="/join/:sessionId" element={<JoinPage />} />

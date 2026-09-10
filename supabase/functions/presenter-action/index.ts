@@ -749,19 +749,16 @@ Deno.serve(async (req) => {
     }
 
     if (action === 'create_question') {
-      const rawScreenshotId = typeof input.screenshotId === 'string' ? input.screenshotId : ''
-      const hasScreenshot = Boolean(rawScreenshotId)
-      const screenshotId = hasScreenshot ? rawScreenshotId : null
+      const screenshotId = input.screenshotId
       const storagePath = typeof input.storagePath === 'string' ? input.storagePath : ''
       const type = typeof input.questionType === 'string' ? input.questionType : ''
-      if ((hasScreenshot && !validUuid(rawScreenshotId)) || !questionTypes.has(type)) {
+      if (!validUuid(screenshotId) || !questionTypes.has(type)) {
         return jsonResponse({ message: '題目資料格式不正確。' }, 400)
       }
-      if (hasScreenshot && (storagePath !== `sessions/${sessionId}/screenshots/${screenshotId}.${storagePath.split('.').at(-1)}` ||
-          !/\.(png|jpg|webp)$/.test(storagePath))) {
+      if (storagePath !== `sessions/${sessionId}/screenshots/${screenshotId}.${storagePath.split('.').at(-1)}` ||
+          !/\.(png|jpg|webp)$/.test(storagePath)) {
         return jsonResponse({ message: '截圖路徑不正確。' }, 400)
       }
-      if (!hasScreenshot && storagePath) return jsonResponse({ message: '截圖路徑不正確。' }, 400)
 
       const options = normalizedOptions(input.options)
       const allowMultiple = Boolean(input.allowMultiple) && ['poll', 'multiple_choice'].includes(type)
@@ -775,23 +772,18 @@ Deno.serve(async (req) => {
         pronunciation: '朗讀發音',
         oral_response: '口語表達',
       }
-      const title = typeof input.title === 'string' && input.title.trim()
-        ? input.title.trim().slice(0, 80)
-        : titles[type]
       let translations = {}
       try {
-        translations = await translateQuestion(title, promptText, options)
+        translations = await translateQuestion(titles[type], promptText, options)
       } catch (translationError) {
         console.error('question translation failed', translationError instanceof Error ? translationError.message : translationError)
       }
-      if (hasScreenshot) {
-        const { data: objectList, error: objectError } = await supabase.storage
-          .from('interact-screenshots')
-          .list(`sessions/${sessionId}/screenshots`, { search: `${screenshotId}.`, limit: 2 })
-        if (objectError) throw objectError
-        if (!objectList?.some((object) => storagePath.endsWith(`/${object.name}`))) {
-          return jsonResponse({ message: '找不到已上傳的截圖。' }, 400)
-        }
+      const { data: objectList, error: objectError } = await supabase.storage
+        .from('interact-screenshots')
+        .list(`sessions/${sessionId}/screenshots`, { search: `${screenshotId}.`, limit: 2 })
+      if (objectError) throw objectError
+      if (!objectList?.some((object) => storagePath.endsWith(`/${object.name}`))) {
+        return jsonResponse({ message: '找不到已上傳的截圖。' }, 400)
       }
 
       const stoppedAt = new Date().toISOString()
@@ -802,19 +794,17 @@ Deno.serve(async (req) => {
         .eq('status', 'active')
       if (stopError) throw stopError
 
-      if (hasScreenshot) {
-        const { data: publicData } = supabase.storage.from('interact-screenshots').getPublicUrl(storagePath)
-        const { error: screenshotError } = await supabase
-          .from('screenshots')
-          .insert({
-            id: screenshotId,
-            session_id: sessionId,
-            storage_path: storagePath,
-            public_url: publicData.publicUrl,
-            ai_status: 'skipped',
-          })
-        if (screenshotError) throw screenshotError
-      }
+      const { data: publicData } = supabase.storage.from('interact-screenshots').getPublicUrl(storagePath)
+      const { error: screenshotError } = await supabase
+        .from('screenshots')
+        .insert({
+          id: screenshotId,
+          session_id: sessionId,
+          storage_path: storagePath,
+          public_url: publicData.publicUrl,
+          ai_status: 'skipped',
+        })
+      if (screenshotError) throw screenshotError
 
       const { data: question, error: questionError } = await supabase
         .from('questions')
@@ -823,7 +813,7 @@ Deno.serve(async (req) => {
           screenshot_id: screenshotId,
           type,
           status: 'active',
-          title,
+          title: titles[type],
           prompt_text: promptText || null,
           options,
           translations,
