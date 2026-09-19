@@ -11,6 +11,14 @@ import { participantLocaleFromStorage, participantText } from '../lib/participan
 import type { ParticipantLocale } from '../lib/participantI18n'
 import type { Participant, Session } from '../types'
 
+const studentNamePattern = /^[A-Za-z0-9]{4,}[\s-]+.+$/
+
+function studentNameFormatMessage(locale: ParticipantLocale) {
+  return locale === 'en'
+    ? 'Please enter your student ID and name, for example: 41234567 Wang Xiao-ming.'
+    : '請輸入「學號 姓名」，例如：41234567 王小明。'
+}
+
 export function JoinPage() {
   const { sessionId: sessionReference = '' } = useParams()
   const [session, setSession] = useState<Session | null>(null)
@@ -106,7 +114,11 @@ export function JoinPage() {
     event.preventDefault()
     const trimmed = name.trim()
     if (!trimmed) {
-      setError(locale === 'en' ? 'Name is required.' : '姓名必填。')
+      setError(studentNameFormatMessage(locale))
+      return
+    }
+    if (!studentNamePattern.test(trimmed)) {
+      setError(studentNameFormatMessage(locale))
       return
     }
 
@@ -183,10 +195,10 @@ export function JoinPage() {
         <span className="form-heading-icon"><UserRound size={24} /></span>
         <h1>{locale === 'en' ? `Join ${session?.title || 'session'}` : `加入${session?.title || '場次'}`}</h1>
         <p className="muted">{session?.status === 'ended'
-          ? (locale === 'en' ? 'Enter your name to view the class materials' : '輸入姓名即可查看課程內容')
-          : (locale === 'en' ? 'Enter your name to join the interactive class' : '輸入姓名後即可進入互動課堂')}</p>
+          ? (locale === 'en' ? 'Enter your student ID and name to view the class materials' : '輸入學號與姓名即可查看課程內容')
+          : (locale === 'en' ? 'Enter your student ID and name to join the interactive class' : '輸入學號與姓名後即可進入互動課堂')}</p>
         <label>
-          {locale === 'en' ? 'Your name' : '你的姓名'}
+          {locale === 'en' ? 'Student ID and name' : '學號與姓名'}
           <input
             autoComplete="name"
             autoFocus
@@ -194,7 +206,7 @@ export function JoinPage() {
             name="participant-name"
             value={name}
             onChange={(event) => setName(event.target.value)}
-            placeholder={locale === 'en' ? 'Enter your name' : '請輸入姓名'}
+            placeholder={locale === 'en' ? 'Example: 41234567 Wang Xiao-ming' : '例如：41234567 王小明'}
           />
         </label>
         {(error || sessionLookupError) && <p className="error">{error || sessionLookupError}</p>}

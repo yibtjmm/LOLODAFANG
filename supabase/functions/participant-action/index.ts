@@ -6,6 +6,7 @@ import { getAdminClient, hashParticipantToken } from '../_shared/supabase.ts'
 declare const EdgeRuntime: { waitUntil(promise: Promise<unknown>): void }
 
 const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+const studentNamePattern = /^[A-Za-z0-9]{4,}[\s-]+.+$/
 
 function validUuid(value: unknown) {
   return typeof value === 'string' && uuidPattern.test(value)
@@ -60,6 +61,7 @@ Deno.serve(async (req) => {
       const name = typeof input.name === 'string' ? input.name.trim().slice(0, 80) : ''
       const deviceId = typeof input.deviceId === 'string' ? input.deviceId.trim().slice(0, 200) : ''
       if (!reference || !name || !deviceId) return jsonResponse({ message: '姓名或場次資料不完整。' }, 400)
+      if (!studentNamePattern.test(name)) return jsonResponse({ message: '請輸入「學號 姓名」，例如：41234567 王小明。' }, 400)
 
       const isId = validUuid(reference)
       const { data: session, error: sessionError } = await supabase
