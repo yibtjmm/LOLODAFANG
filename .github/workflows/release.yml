@@ -63,7 +63,7 @@ jobs:
           echo "No Supabase project embedded."
 
       - name: Package Windows app
-        run: pnpm exec electron-builder --win portable zip --x64 --publish never
+        run: pnpm exec electron-builder --win zip --x64 --publish never
 
       - name: Publish release
         env:
@@ -76,8 +76,7 @@ jobs:
 
           | 檔案 | 說明 |
           |---|---|
-          | `LOLODAFANG.zip` | 解壓後直接執行資料夾內的 `LOLODAFANG.exe`，開啟較快，**建議使用** |
-          | `LOLODAFANG.exe` | 單一檔案免安裝版，每次啟動需自我解壓，較慢 |
+          | `LOLODAFANG.zip` | 解壓後直接執行資料夾內的 `LOLODAFANG.exe` |
 
           ## 首次使用
 
@@ -89,7 +88,8 @@ jobs:
 
           ## 注意
 
-          執行檔未經程式碼簽章，Windows SmartScreen 可能顯示「不明發行者」，
+          這是資料夾版 ZIP，不再發布單一免安裝 EXE，以降低瀏覽器誤判機率。
+          但資料夾內的執行檔仍未經程式碼簽章，Windows SmartScreen 可能顯示「不明發行者」，
           請點「其他資訊 → 仍要執行」。部分公司電腦的資安政策可能直接封鎖。
 
           個人與教育用途免費；補習班、企業內訓與收費課程屬商業用途，
@@ -99,5 +99,4 @@ jobs:
           gh release create "$TAG" \
             --title "LOLODAFANG $TAG" \
             --notes "$notes" \
-            release/LOLODAFANG.exe \
             release/LOLODAFANG.zip

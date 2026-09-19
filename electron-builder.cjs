@@ -1,8 +1,8 @@
 // APP_EDITION picks the Windows app to build. It only renames the artifact and
 // its product name; both editions ship the same code, and the caption controls
 // are gated at runtime by VITE_APP_EDITION (see src/lib/edition.ts).
-//   unset / standard -> LOLODAFANG.exe
-//   plus             -> LOLODAFANGPlus.exe
+//   unset / standard -> LOLODAFANG
+//   plus             -> LOLODAFANGPlus
 const productName = process.env.APP_EDITION === 'plus' ? 'LOLODAFANGPlus' : 'LOLODAFANG'
 
 module.exports = {
@@ -35,13 +35,9 @@ module.exports = {
     executableName: productName,
     requestedExecutionLevel: 'asInvoker',
     target: [
-      {
-        target: 'portable',
-        arch: ['x64'],
-      },
-      // Unlike portable, which re-extracts its full payload to a temp folder
-      // on every launch (~10s), this zip is unpacked once and the exe inside
-      // then starts directly (~2s) on every subsequent run.
+      // Ship the unpacked app as a zip. The portable single-file executable is
+      // more likely to be flagged by browser/Defender reputation checks because
+      // it self-extracts on launch and is unsigned.
       {
         target: 'zip',
         arch: ['x64'],
